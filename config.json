@@ -1,0 +1,36 @@
+{
+    "polling_interval_seconds": 5,
+    "directories": {
+        "input": "./input_feed",
+        "params": "./processed",
+        "error": "./errors"
+    },
+    "rules": [
+        {
+            "pattern": "CLAIM_*.csv",
+            "description": "Inbound Claims Feed",
+            "required_columns": [
+                "ClaimNumber",
+                "TotalPaid"
+            ],
+            "alert_email": "claims.admin@php.com",
+            "action": "move_to_processed"
+        },
+        {
+            "pattern": "ENROLL_*.834",
+            "description": "Benefit Enrollment 834",
+            "alert_email": "enrollment.ops@php.com",
+            "action": "move_to_processed"
+        },
+        {
+            "pattern": "ELIG_*.txt",
+            "description": "Legacy Eligibility Flat File",
+            "alert_email": "legacy.systems@php.com",
+            "action": "move_to_processed"
+        }
+    ],
+    "global_alerts": {
+        "admin_email": "shazaly.musa@php.com",
+        "smtp_server": "mock_smtp_server"
+    }
+}

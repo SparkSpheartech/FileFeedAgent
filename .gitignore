@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.log
+input_feed/
+processed/
+errors/
+.DS_Store
+.vscode/
