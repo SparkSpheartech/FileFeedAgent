@@ -1,41 +1,121 @@
-# File Feed Command Center - Data Ingest Agent
+# 📂 File Feed Agent — AI-Powered Data Ingest Monitor
 
-**File Feed Command Center** is an automated monitoring agent designed to supervise critical data pipelines. It watches for incoming SFTP drops, validates file patterns against a rules engine, and routes them for processing—automatically triggering alerts for anomalies.
-
-## 🚀 Key Features
-
-*   **Real-time Monitoring**: Continuous polling loop watches input directories (0-latency detection).
-*   **Rules Engine**: Use `config.json` to define complex file patterns (Globs) and map them to business actions.
-*   **Automated Routing**: Automatically moves valid files to `processed/` and invalid files to `errors/`.
-*   **Alerting System**: Integrated logging and mock-email notification system for "Unknown File" events.
-
-## 🛠 Tech Stack
-*   **Language**: Python 3.10+
-*   **Core Logic**: `fnmatch` for pattern matching, `shutil` for atomic moves.
-*   **Architecture**: Event-Loop Pattern (Daemon-ready).
-
-## ⚡ How to Run
-
-1.  **Start the Agent**:
-    ```bash
-    python monitor.py
-    ```
-    *The agent is now active. You will see "Monitoring: ./input_feed"*
-
-2.  **Simulate File Drops**:
-    Open a new terminal and run:
-    ```bash
-    python test_feed.py
-    ```
-    *This drops valid (CLAIMS, ENROLL) and invalid (UNKNOWN) files.*
-
-3.  **Check Output**:
-    *   **Valid Files** -> Moved to `./processed`
-    *   **Bad Files** -> Moved to `./errors`
-    *   **Logs** -> Check `activity.log` for "EMAIL SENT" alerts.
-
-## 💡 Use Case
-In TPA/Payer environments, thousands of files arrive daily (834s, 837s, Eligibility). A missing file can mean missed coverage. This agent acts as the **First Line of Defense**, ensuring no file is left stuck in an inbox.
+> **An autonomous AI monitoring agent that watches, validates, and routes data files**  
+> Acts as the first line of defense for critical data pipelines.
 
 ---
-*Created by Shazaly Musa*
+
+## 🧠 AI Agent Architecture
+
+```mermaid
+graph TB
+    subgraph INPUT["📥 Inbound Data Layer"]
+        I1[SFTP Drop Zone]
+        I2[Email Attachments]
+        I3[API Webhook]
+    end
+
+    subgraph AGENT["🤖 File Feed Agent Core"]
+        A1[Watcher Agent\nContinuous Polling]
+        A2[Pattern Recognition\nAgent]
+        A3[Validation Rules\nAgent]
+        A4[Routing Decision\nAgent]
+    end
+
+    subgraph OUTCOMES["📤 Action Layer"]
+        O1[Processed Queue\nValid Files]
+        O2[Error Queue\nInvalid Files]
+        O3[Alert Queue\nUnknown Files]
+    end
+
+    subgraph HUMAN["👤 Human Oversight"]
+        H1[Operator Dashboard]
+        H2[Email Notifications]
+        H3[Activity Log]
+    end
+
+    I1 --> A1
+    I2 --> A1
+    I3 --> A1
+    A1 -->|File Detected| A2
+    A2 -->|Pattern Match| A3
+    A3 -->|Valid| A4
+    A3 -->|Invalid| O2
+    A3 -->|Unknown| O3
+    A4 --> O1
+    O1 --> H1
+    O2 --> H1
+    O3 -->|EMAIL SENT| H2
+    A1 --> H3
+
+    style A1 fill:#4CAF50,stroke:#333,color:#fff
+    style A2 fill:#2196F3,stroke:#333,color:#fff
+    style A3 fill:#FF9800,stroke:#333,color:#fff
+    style A4 fill:#9C27B0,stroke:#333,color:#fff
+```
+
+## 🤖 How the AI Agent Works
+
+This is an **autonomous file monitoring agent** that never sleeps:
+
+| Agent Component | Function |
+|----------------|----------|
+| **Watcher Agent** | Continuously polls input directories — zero-latency file detection |
+| **Pattern Recognition Agent** | Uses `fnmatch` to match files against configurable glob patterns (CLAIMS_*.csv, ENROLL_*.csv) |
+| **Validation Rules Agent** | Checks header integrity, file size thresholds, naming conventions |
+| **Routing Decision Agent** | Moves valid files → `processed/`, invalid → `errors/`, unknown → alerts |
+| **Alerting Agent** | Sends email-style notifications for anomalous file events |
+
+## 🔄 Before vs After
+
+```mermaid
+graph LR
+    subgraph BEFORE["❌ Before (Manual)"]
+        BM[Staff manually check\nSFTP folders hourly\nFiles get stuck/lost\nMissed SLAs]
+    end
+
+    subgraph AFTER["✅ After (AI Agent)"]
+        AM[24/7 autonomous monitoring\nInstant file routing\nZero missed files\nSLA compliance]
+    end
+
+    BM -->|File Feed Agent| AM
+```
+
+## 🛠 Tech Stack
+
+| Component | Technology | Agent Role |
+|-----------|-----------|------------|
+| **Core Logic** | Python 3.10+ | Agent brain |
+| **Pattern Matching** | `fnmatch` | Recognition engine |
+| **File Operations** | `shutil` | Atomic moves & routing |
+| **Architecture** | Event-Loop (Daemon-ready) | Continuous operation |
+
+## ⚡ Quick Start
+
+```bash
+# 1. Start the monitoring agent
+python monitor.py
+# Output: "Monitoring: ./input_feed"
+
+# 2. Simulate file drops (in another terminal)
+python test_feed.py
+
+# 3. Check results
+# Valid files → ./processed/
+# Invalid files → ./errors/
+# Alerts → activity.log
+```
+
+## 💡 Why This Matters
+
+In TPA/Payer environments, thousands of files arrive daily (834s, 837s, Eligibility). A missing file can mean:
+- Missed coverage enrollment
+- Delayed claims processing
+- Compliance violations
+
+This AI agent acts as the **First Line of Defense** — ensuring no file is left stuck in an inbox.
+
+---
+
+Built by **[Shazaly Musa](https://github.com/SparkSpheartech)** — Founder, SparkSphear Tech  
+*AI Agents for Healthcare Data Pipeline Automation*
