@@ -1,131 +1,127 @@
-# 📂 File Feed Agent — AI-Powered Data Ingest Monitor
+# 📂 Healthcare Data Operations — AI Agents for File Monitoring
 
-> **An autonomous AI monitoring agent that watches, validates, and routes data files**  
-> Acts as the first line of defense for critical data pipelines.
+> SPARKSPHEAR builds AI agents for healthcare data operations workflows across TPAs, payer organizations, clearinghouses, and healthcare data processing centers.
+
+**Start With the Workflow. Scale What Works.**
+
+We audit the system, connect the tools that fit, and automate the work that does not require constant manual attention.
 
 ---
 
 ## ❌ The Problem
 
-In TPA/Payer environments, thousands of files arrive daily — 834s, 837s, eligibility files, claims feeds. Staff must manually check SFTP folders hourly, identify file types, validate formats, and route them for processing. Files get stuck in inboxes, naming conventions drift, and missed files mean missed SLAs, delayed claims, and compliance violations.
+TPAs and payer organizations process thousands of files daily — 834s, 837s, eligibility files, claims feeds. Staff manually check folders hourly, but files get stuck, naming conventions drift, and missed files mean missed SLAs. The operations team does everything — and the data pipeline plateaus.
 
-**Before:** Manual hourly folder checks, stuck/lost files, human error, missed SLAs, staff burnout.
+**Before:** Manual hourly folder checks, stuck and lost files, human error, missed SLAs, staff burnout, no audit trail.
 
-**After (AI Agent):** 24/7 autonomous monitoring — instant file detection, pattern recognition, validation routing, and email alerts for anomalies. Zero missed files, SLA compliance guaranteed.
+**After (AI Agent Fleet):** 24/7 autonomous monitoring with instant file detection, pattern recognition, validation routing, and email alerts for anomalies. Zero missed files, SLA compliance guaranteed.
 
 ---
 
-## 🧠 AI Agent Architecture
+## 🤖 AI Agent Fleet
+
+Four AI agents that watch, validate, and route every file that enters your data pipeline.
+
+### Architecture
+
+```mermaid
+graph LR
+    subgraph BEFORE["❌ Before"]
+        B1[Manual folder checks]
+        B2[Files get stuck/lost]
+        B3[Human validation]
+        B4[No alerting]
+    end
+    subgraph AFTER["✅ After"]
+        A1[Watcher Agent]
+        A2[Pattern Recognition Agent]
+        A3[Validation Rules Agent]
+        A4[Routing & Alerting Agent]
+    end
+    B1 --> A1
+    B2 --> A2
+    B3 --> A3
+    B4 --> A4
+```
 
 ```mermaid
 graph TB
-    subgraph INPUT["📥 Inbound Data Layer"]
+    subgraph INPUT["📥 Inbound"]
         I1[SFTP Drop Zone]
         I2[Email Attachments]
         I3[API Webhook]
     end
-
-    subgraph AGENT["🤖 File Feed Agent Core"]
-        A1[Watcher Agent\nContinuous Polling]
-        A2[Pattern Recognition\nAgent]
-        A3[Validation Rules\nAgent]
-        A4[Routing Decision\nAgent]
+    subgraph AGENTS["🤖 AI Agents"]
+        A1[Watcher\nAgent]
+        A2[Pattern\nRecognition Agent]
+        A3[Validation\nRules Agent]
+        A4[Routing &\nAlerting Agent]
     end
-
-    subgraph OUTCOMES["📤 Action Layer"]
-        O1[Processed Queue\nValid Files]
-        O2[Error Queue\nInvalid Files]
-        O3[Alert Queue\nUnknown Files]
+    subgraph WORKFLOW["⚙️ Workflow Engine"]
+        W1[n8n Orchestrator]
+        W2[Activity Log]
+        W3[Email Gateway]
     end
-
-    subgraph HUMAN["👤 Human Oversight"]
-        H1[Operator Dashboard]
-        H2[Email Notifications]
-        H3[Activity Log]
-    end
-
     I1 --> A1
     I2 --> A1
     I3 --> A1
-    A1 -->|File Detected| A2
-    A2 -->|Pattern Match| A3
-    A3 -->|Valid| A4
-    A3 -->|Invalid| O2
-    A3 -->|Unknown| O3
-    A4 --> O1
-    O1 --> H1
-    O2 --> H1
-    O3 -->|EMAIL SENT| H2
-    A1 --> H3
-
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> W1
+    W1 --> W2
+    W1 --> W3
     style A1 fill:#4CAF50,stroke:#333,color:#fff
     style A2 fill:#2196F3,stroke:#333,color:#fff
     style A3 fill:#FF9800,stroke:#333,color:#fff
     style A4 fill:#9C27B0,stroke:#333,color:#fff
 ```
 
-## 🤖 How the AI Agent Works
+### Answer and route
+The agent handles approved file drops by identifying file type, validating format against configurable rules, and routing to the correct processing path. It captures the filename, pattern match, validation result, and destination — then sends the right processing path or alert.
 
-This is an **autonomous file monitoring agent** that never sleeps:
+### Bring clients back
+Use file-type-specific return windows (daily 834 cutoff alerts, weekly 837 reconciliation reminders, monthly eligibility file audits) to flag processing gaps and prepare operations-approved escalation messages.
 
-| Agent Component | Function |
-|----------------|----------|
-| **Watcher Agent** | Continuously polls input directories — zero-latency file detection |
-| **Pattern Recognition Agent** | Uses `fnmatch` to match files against configurable glob patterns (CLAIMS_*.csv, ENROLL_*.csv) |
-| **Validation Rules Agent** | Checks header integrity, file size thresholds, naming conventions |
-| **Routing Decision Agent** | Moves valid files → `processed/`, invalid → `errors/`, unknown → alerts |
-| **Alerting Agent** | Sends email-style notifications for anomalous file events |
+### Keep control
+File rejection decisions, routing overrides, and SLA escalation thresholds stay behind permissions, escalation rules, and human review. The agent assists; you remain responsible.
 
-## 🔄 Before vs After
+---
 
-```mermaid
-graph LR
-    subgraph BEFORE["❌ Before (Manual)"]
-        BM[Staff manually check\nSFTP folders hourly\nFiles get stuck/lost\nMissed SLAs]
-    end
+## 🚀 Start With One Workflow
 
-    subgraph AFTER["✅ After (AI Agent)"]
-        AM[24/7 autonomous monitoring\nInstant file routing\nZero missed files\nSLA compliance]
-    end
+We do not start by selling the biggest package. We start by auditing the workflow and identifying the smallest useful agent.
 
-    BM -->|File Feed Agent| AM
-```
+**Workflow Audit — Starting at $297 one-time**
+- Current workflow map
+- Bottleneck analysis
+- Existing-tool review
+- Data and access requirements
+- Agent suitability assessment
+- Three prioritized automation opportunities
+- Recommended first agent
+- Implementation scope
+- Measurement and acceptance plan
 
-## 🛠 Tech Stack
+**Implementation — One-time build fee**
+- Agent development and testing
+- Approved integration setup
+- Escalation rule configuration
+- Acceptance criteria verification
 
-| Component | Technology | Agent Role |
-|-----------|-----------|------------|
-| **Core Logic** | Python 3.10+ | Agent brain |
-| **Pattern Matching** | `fnmatch` | Recognition engine |
-| **File Operations** | `shutil` | Atomic moves & routing |
-| **Architecture** | Event-Loop (Daemon-ready) | Continuous operation |
+**Monthly Agent Operation — Recurring package fee**
 
-## ⚡ Quick Start
+| Package | Price | Best For |
+|---------|-------|----------|
+| **SIGNAL START** | $297/mo | One narrow workflow, one primary channel, one or two approved integrations |
+| **FLOW CONTROL** | $697/mo | Several related workflows with routing, follow-up, and exception handling |
+| **SYSTEM LIFT** | $1,497/mo | Multiple workflows, channels, custom rules, and meaningful reporting |
+| **SCALE CONTROL** | from $2,997/mo | Multi-location, operations-heavy, custom APIs and dashboards |
 
-```bash
-# 1. Start the monitoring agent
-python monitor.py
-# Output: "Monitoring: ./input_feed"
-
-# 2. Simulate file drops (in another terminal)
-python test_feed.py
-
-# 3. Check results
-# Valid files → ./processed/
-# Invalid files → ./errors/
-# Alerts → activity.log
-```
-
-## 💡 Why This Matters
-
-In TPA/Payer environments, thousands of files arrive daily (834s, 837s, Eligibility). A missing file can mean:
-- Missed coverage enrollment
-- Delayed claims processing
-- Compliance violations
-
-This AI agent acts as the **First Line of Defense** — ensuring no file is left stuck in an inbox.
+This maps to **FLOW CONTROL** — several related workflows (file monitoring, pattern matching, validation, alerting) with routing between agents and exception handling for unknown file types.
 
 ---
 
 Built by **[Shazaly Musa](https://github.com/SparkSpheartech)** — Founder, SparkSphear Tech  
-*AI Agents for Healthcare Data Pipeline Automation*
+*Start With the Workflow. Scale What Works.*  
+*AI Agents for Healthcare Data Operations*
