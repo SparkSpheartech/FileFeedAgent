@@ -5,6 +5,16 @@
 
 ---
 
+## ❌ The Problem
+
+In TPA/Payer environments, thousands of files arrive daily — 834s, 837s, eligibility files, claims feeds. Staff must manually check SFTP folders hourly, identify file types, validate formats, and route them for processing. Files get stuck in inboxes, naming conventions drift, and missed files mean missed SLAs, delayed claims, and compliance violations.
+
+**Before:** Manual hourly folder checks, stuck/lost files, human error, missed SLAs, staff burnout.
+
+**After (AI Agent):** 24/7 autonomous monitoring — instant file detection, pattern recognition, validation routing, and email alerts for anomalies. Zero missed files, SLA compliance guaranteed.
+
+---
+
 ## 🧠 AI Agent Architecture
 
 ```mermaid
